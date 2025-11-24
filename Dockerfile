@@ -1,5 +1,5 @@
-# -------- ビルド用コンテナ（Gradle + JDK） --------
-FROM gradle:8.10.2-jdk-21 AS build
+# -------- ビルド用コンテナ（Gradle + JDK21） --------
+FROM gradle:jdk21 AS build
 WORKDIR /workspace
 
 # プロジェクト一式をコピー
