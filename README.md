@@ -56,13 +56,20 @@ VOIDRは近未来を舞台とした戦術FPSゲーム「VOIDR」の公式Webサ�
   - **購入履歴**  
     注文詳細や配送ステータスを確認できる
     ![購入履歴](docs/images/sample_EC_purchase_history.png)
+    
 - **管理機能**
   - **商品管理**  
     商品の登録・編集・ソフト削除/復活に対応し、XMLとデータベースの同期が可能です。
+    ![商品管理](docs/images/sample_EC_product_management.png)
+    ![商品新規登録](docs/images/sample_EC_product_create.png)  
+    
   - **会員管理**  
     会員一覧の表示・検索、ユーザー情報の更新、権限の変更、退会（論理削除）が行えます。
+    ![会員管理](docs/images/sample_EC_user_management.png)  
+    
   - **新着情報管理**  
     ニュースの追加・編集・削除機能を持ち、トップページには最新3件のニュースが表示されます。
+    ![新着情報管理](docs/images/sample_EC_news_management.png)
 
 - **メール通知**  
   GmailのSMTPを使用し、環境変数で設定したパスワードを用いてメール送信を行います（`spring-boot-starter-mail`利用）。
@@ -87,80 +94,5 @@ VOIDRは近未来を舞台とした戦術FPSゲーム「VOIDR」の公式Webサ�
 | **ビルドツール** | Gradle（Java 21 toolchain） |
 | **フロントエンド** | HTML / CSS / JavaScript（Canvasアニメーション等） |
 | **テスト** | Spring Boot Test / MyBatis Test |
-| **運用・環境構築** | Dockerfile によるアプリケーションのコンテナ化 |
+| **運用・環境構築** | Dockerfile / Spring Bootによるアプリケーションのコンテナ化 |
 | **その他ライブラリ** | MyBatis Spring Boot Starter / Thymeleaf Extras Spring Security |
-
----
-
-## アーキテクチャ概要
-
-本アプリケーションは、保守性と拡張性を重視した**レイヤードアーキテクチャ**を採用しています。
-
-### 1. Controller 層  
-`com.example.voidr.controller`  
-HTTPリクエストを受け取り、画面遷移やサービス層の呼び出しを担当します。  
-例：
-- `HomeController`：各種情報ページ・お問い合わせ画面を表示  
-- `PasswordResetController`：パスワード再設定フローを制御
-
-### 2. Service 層  
-`service` / `service.impl`  
-ビジネスロジックを集約し、データアクセス層と連携します。  
-主な役割：
-- `ItemService`：商品検索・登録・削除・XML同期  
-- `FavoriteService`：お気に入りの追加・削除・トグル処理  
-- `CartService`：カート操作全般
-
-### 3. Repository / Mapper 層  
-`repository` / `mapper/*.xml`  
-MyBatis を用いたデータアクセス層です。  
-Mapper XML にSQLを定義し、DBとのやり取りを行います。  
-例：
-- `ItemMapper.xml`：商品一覧・検索・登録・更新・論理削除などのSQLを定義
-
-### 4. Entity / DTO 層  
-`entity` / `form` / `view`  
-- Entity：DBテーブルと対応するドメインクラス  
-  （`Item`, `Account`, `Cart`, `OrderList` など）
-- DTO：画面入力や表示専用のクラス  
-  （`SignupForm`, `LoginForm`, `ContactForm` など）
-
-### 5. Configuration 層  
-`SecurityConfig`  
-Spring Security を用いた以下の設定を担当します。
-- URLアクセス制御  
-- フォームログイン設定  
-- CSRF対策  
-- 認証成功・失敗時のハンドリング
-
-### 6. View 層  
-`src/main/resources/templates`  
-Thymeleaf を使用してHTMLを生成し、CSS / JavaScript によりUIと動的挙動を実装しています。  
-主な画面：
-- ログイン / 新規登録  
-- ホームページ  
-- 商品一覧・詳細  
-- カート  
-- パスワード再設定
-
-### 7. データベース設計  
-`schema.sql`  
-PostgreSQLのテーブル定義、ENUM型、インデックスを管理しています。  
-初期データはXML同期や手動投入により登録します。
-
----
-
-## セットアップ手順
-
-### 1. 前提条件
-- Java 21  
-- Gradle  
-- PostgreSQL  
-- （メール送信機能を使用する場合）Gmailのアプリパスワード
-
-### 2. リポジトリのクローン
-
-```bash
-git clone https://github.com/taniguchi09-git/303groupWork.git
-cd 303groupWork
-
