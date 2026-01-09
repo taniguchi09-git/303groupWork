@@ -48,8 +48,8 @@ VOIDRは近未来を舞台とした戦術FPSゲーム「VOIDR」の公式Webサ�
     ![商品一覧](docs/images/sample_cart.png)
 
     - **購入の流れ**
-      注文時に支払い方法・配送先・希望日時を入力して注文を作成
-    購入確認 → 購入確定
+      注文時に支払い方法・配送先・希望日時を入力して注文を作成  
+      内容の確認 → 購入を確定
     ![購入内容の確認](docs/images/sample_EC_purchase_confirmation.png)
     ![購入の確定](docs/images/sample_EC_purchase_completed.png)
 
