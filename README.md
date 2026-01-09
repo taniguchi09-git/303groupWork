@@ -47,9 +47,15 @@ VOIDRは近未来を舞台とした戦術FPSゲーム「VOIDR」の公式Webサ�
     ログインユーザーが商品をカートに追加し、数量の変更や削除、合計金額の計算、バッジ表示などが行えます。
     ![商品一覧](docs/images/sample_cart.png)
 
-  - **購入履歴**  
-    注文時に支払い方法・配送先・希望日時を入力して注文を作成でき、注文情報は `order_list` と `order` テーブルに保存されます。
+    - **購入の流れ**
+      注文時に支払い方法・配送先・希望日時を入力して注文を作成
+    購入確認 → 購入確定
+    ![購入内容の確認](docs/images/sample_EC_purchase_confirmation.png)
+    ![購入の確定](docs/images/sample_EC_purchase_completed.png)
 
+  - **購入履歴**  
+    注文詳細や配送ステータスを確認できる
+    ![購入履歴](docs/images/sample_EC_purchase_history.png)
 - **管理機能**
   - **商品管理**  
     商品の登録・編集・ソフト削除/復活に対応し、XMLとデータベースの同期が可能です。
